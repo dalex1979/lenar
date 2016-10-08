@@ -1,0 +1,9 @@
+- name: fail2ban.conf
+  copy: src=roles/all/files/fail2ban-ssh.conf dest=/etc/fail2ban/jail.d/sshd.conf force=no
+  register: fail2banconf
+- name: reload fail2ban
+  when: fail2banconf.changed
+  service: name=fail2ban state=restarted
+
+- name: start fail2ban
+  service: name=fail2ban state=started

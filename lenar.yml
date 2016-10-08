@@ -1,0 +1,20 @@
+- hosts: u1604
+  roles:
+    - u1604
+
+- hosts: u1404
+  roles:
+    - u1404
+
+- hosts: debian8
+  roles:
+    - debian8
+
+- hosts: centos
+  roles:
+    - centos
+
+#- hosts: all
+#  roles:
+#    - all
+

@@ -1,0 +1,14 @@
+#- name: ntp
+#  service: name=ntp state=stopped
+#- shell: ntpdate 0.ubuntu.pool.ntp.org
+#- service: name=ntp state=started
+
+- name: fail2ban.conf
+  copy: src=roles/u1604/files/fail2ban-ssh.conf dest=/etc/fail2ban/jail.d/sshd.conf force=no
+  register: fail2banconf
+- name: reload fail2ban
+#  when: fail2banconf.changed
+  service: name=fail2ban state=reloaded
+
+- name: start fail2ban
+  service: name=fail2ban state=started

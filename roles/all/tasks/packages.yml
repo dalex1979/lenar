@@ -1,0 +1,22 @@
+- name: install reqired packages
+  action: apt pkg={{item}} state=installed
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  with_items:
+    - fail2ban
+    - ntp
+    - ntpdate
+
+- name: Add repository
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  yum_repository:
+    name: epel
+    description: EPEL YUM repo
+    baseurl: http://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+    gpgkey: http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6
+    
+- name: install reqired packages
+  yum: name=fail2ban state=latest
+  yum: name=ntp state=latest
+  yum: name=ntpdate state=latest
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+

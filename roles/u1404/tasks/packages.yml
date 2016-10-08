@@ -1,0 +1,7 @@
+- name: install reqired packages
+  action: apt pkg={{item}} state=installed
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  with_items:
+    - fail2ban
+    - ntp
+    - ntpdate
