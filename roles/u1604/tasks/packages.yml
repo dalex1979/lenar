@@ -5,3 +5,5 @@
     - fail2ban
     - ntp
     - ntpdate
+    - squid
+    

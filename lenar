@@ -1,12 +1,13 @@
 [u1604]
 #server23 ansible_ssh_host=96.9.247.66
+server24 ansible_ssh_host=23.229.14.171
 [u1404]
-server22 ansible_ssh_host=96.9.246.242
-server20 ansible_ssh_host=96.9.249.198
-server12 ansible_ssh_host=96.9.246.61
+#server22 ansible_ssh_host=96.9.246.242
+#server20 ansible_ssh_host=96.9.249.198
+#server12 ansible_ssh_host=96.9.246.61
 [debian8]
-server21 ansible_ssh_host=96.9.249.218
-server10 ansible_ssh_host=96.9.246.59
+#server21 ansible_ssh_host=96.9.249.218
+#server10 ansible_ssh_host=96.9.246.59
 [centos]
-server5 ansible_ssh_host=127.0.0.1
-server6 ansible_ssh_host=162.244.35.200
+#server5 ansible_ssh_host=127.0.0.1
+#server6 ansible_ssh_host=162.244.35.200

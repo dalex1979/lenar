@@ -1,14 +1,33 @@
-#- name: ntp
-#  service: name=ntp state=stopped
-#- shell: ntpdate 0.ubuntu.pool.ntp.org
-#- service: name=ntp state=started
+- name: ntp
+  service: name=ntp state=stopped
+- shell: ntpdate 0.ubuntu.pool.ntp.org
+- service: name=ntp state=started
 
 - name: fail2ban.conf
-  copy: src=roles/u1604/files/fail2ban-ssh.conf dest=/etc/fail2ban/jail.d/sshd.conf force=no
+  copy: src=roles/u1604/files/fail2ban-ssh.conf dest=/etc/fail2ban/jail.d/sshd.conf
   register: fail2banconf
 - name: reload fail2ban
-#  when: fail2banconf.changed
+  when: fail2banconf.changed
   service: name=fail2ban state=reloaded
 
 - name: start fail2ban
   service: name=fail2ban state=started
+
+- name: copy squid.conf
+  copy: src=roles/u1604/files/squid.conf dest=/etc/squid/squid.conf
+  register: squidconf
+- name: reload squid
+  when: squidconf.changed
+  service: name=squid state=restarted
+
+- name: start squid
+  service: name=squid state=started
+
+- name: copy acl_update_squid.sh
+  copy: src=roles/u1604/files/acl_update_squid.sh dest=/root/acl_update_squid.sh mode=755
+- name: copy iface_alias_deb.sh
+  copy: src=roles/u1604/files/iface_alias_deb.sh dest=/root/iface_alias_deb.sh mode=755
+- name: copy squid_iplist_gen.sh
+  copy: src=roles/u1604/files/squid_iplist_gen.sh dest=/root/squid_iplist_gen.sh mode=755
+- name: copy gen_ips_list.sh
+  copy: src=roles/u1604/files/gen_ips_list.sh dest=/root/gen_ips_list.sh mode=755
